@@ -23,18 +23,18 @@ services:
 
   # Enable Mailpit if you need to test outgoing mail services
   # See https://mailpit.axllent.org/
-  #  mailpit:
-  #    image: axllent/mailpit
-  #    volumes:
-  #      - mailpit-data:/data
-  #    ports:
-  #      - 8025:8025
-  #      - 1025:1025
-  #    environment:
-  #      MP_MAX_MESSAGES: 5000
-  #      MP_DATA_FILE: /data/mailpit.db
-  #      MP_SMTP_AUTH_ACCEPT_ANY: 1
-  #      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+   mailpit:
+     image: axllent/mailpit
+     volumes:
+       - mailpit-data:/data
+     ports:
+       - 8025:8025
+       - 1025:1025
+     environment:
+       MP_MAX_MESSAGES: 5000
+       MP_DATA_FILE: /data/mailpit.db
+       MP_SMTP_AUTH_ACCEPT_ANY: 1
+       MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
   redis-cache:
     image: docker.io/redis:alpine
@@ -53,7 +53,7 @@ services:
     volumes:
       - ..:/workspace:cached
       # Enable if you require git cloning
-      # - ${HOME}/.ssh:/home/frappe/.ssh
+      - ${HOME}/.ssh:/home/frappe/.ssh
     working_dir: /workspace/development
     ports:
       - 8000-8005:8000-8005
@@ -88,4 +88,4 @@ services:
 volumes:
   mariadb-data:
   #postgresql-data:
-  #mailpit-data:
+  mailpit-data:
